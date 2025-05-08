@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage('Run Hello') {
+            steps {
+                sh ' ./hello.shcd ..
+                '
+            }
+        }
+    }
+}
