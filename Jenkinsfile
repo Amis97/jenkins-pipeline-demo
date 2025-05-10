@@ -12,10 +12,10 @@ pipeline {
                 echo "Hello ${params.USERNAME}!"
             }
         }
-        stage('Etra step') {
+        stage('Extra Step') {
             when {
                 expression {
-                    return params.RUN_EXTRA_STEP
+                    return params.RUN_EXTRA_STEP }
                 }
                 steps {
                     echo 'This is the extra step running!'
@@ -23,4 +23,3 @@ pipeline {
             }
         }
     }
-}
