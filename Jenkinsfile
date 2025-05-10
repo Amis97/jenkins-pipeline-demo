@@ -1,9 +1,19 @@
 pipeline {
     agent any
     stages {
-        stage('Run Hello') {
+        stage('say Hello') {
             steps {
-                sh 'bash hello.sh'
+                echo 'Hello, jenkins!'
+            }
+        }
+        stage('wait for input') {
+            steps {
+                input message: 'ادامه بدیم؟'
+            }
+        }
+        stage('continu'){
+            steps {
+                echo 'مرحله بعدی اجرا شد'
             }
         }
     }
