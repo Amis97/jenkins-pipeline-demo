@@ -1,19 +1,14 @@
 pipeline {
     agent any
+
+    parameters {
+        string(name: 'sima', defaultValue: 'kashefi', description: 'golpar')
+    }
+
     stages {
-        stage('say Hello') {
+        stage('Greet') {
             steps {
-                echo 'Hello, jenkins!'
-            }
-        }
-        stage('wait for input') {
-            steps {
-                input message: 'ادامه بدیم؟'
-            }
-        }
-        stage('continu'){
-            steps {
-                echo 'مرحله بعدی اجرا شد'
+                echo "Hello ${params.USERNAME}!"
             }
         }
     }
