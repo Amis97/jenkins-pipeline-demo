@@ -1,0 +1,1 @@
+echo "It's friday! Running the special task ..."
