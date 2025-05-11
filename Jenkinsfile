@@ -1,25 +1,27 @@
 pipeline {
     agent any
-
-    parameters {
-        string(name: 'USERNAME', defaultValue:'USER',description: 'enter your name')
-        booleanParam(name: 'RUN_EXTRA_STEP', defaultValue: false, description: 'RUN the extra step?')
+    triggers {
+        cron('H H * * *')
     }
+
+    //parameters {
+     //   string(name: 'USERNAME', defaultValue:'USER',description: 'enter your name')
+      //  booleanParam(name: 'RUN_EXTRA_STEP', defaultValue: false, description: 'RUN the extra step?')
+    //}
 
     stages {
-        stage('Greet') {
+        stage('check day') {
             steps {
-                echo "Hello ${params.USERNAME}!"
-            }
-        }
-        stage('Extra Step') {
-            when {
-                expression {
-                    return params.RUN_EXTRA_STEP }
-                }
-                steps {
-                    echo 'This is the extra step running!'
-                }
+                script {
+                    def today = new Date().format('EEEE', TimeZone.getTimeZone('Asia/Tehran'))
+                    echo "today is: ${today}"
+                    if (today == 'Friday') {
+                        sh './friday.sh'
+                    }
+                    else {
+                        echo 'Not Friday, skipping special task.'
+                    }                  }
             }
         }
     }
+}
