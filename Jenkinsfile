@@ -15,12 +15,18 @@ pipeline {
                 script {
                     def today = new Date().format('EEEE', TimeZone.getTimeZone('Asia/Tehran'))
                     echo "today is: ${today}"
-                    if (today == 'Friday') {
-                        sh './friday.sh'
-                    }
-                    else {
-                        echo 'Not Friday, skipping special task.'
-                    }                  }
+                }
+            }
+        }
+                    stage('only on saturday') {
+                        when {
+                            expression {
+                                new Date().format('EEEE', TimeZone.getTimeZone('Asia/Tehran')) == 'saturday'
+                            }
+                        }
+                        steps {
+                            echo 'This stage runs only on saturday.'
+                        
             }
         }
     }
